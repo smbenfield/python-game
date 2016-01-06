@@ -16,11 +16,13 @@ def dead(death):
 	print "Would you like to try again?"
 	print "Yes or No?"
 	restart = raw_input(prompt)
-	if restart == "Yes" or "yes":
+	if restart == ("Yes" or "yes"):
 		start()
+	elif restart == ("No" or "no"):
+		exit(bye)
 	else:
 		print "Bye!"
-		exit()
+		exit(bye)
 
 
 def start():
@@ -34,6 +36,8 @@ def start():
 	start = raw_input(prompt)
 
 	path(start)
+
+	exit()
 
 
 def path(direction):
