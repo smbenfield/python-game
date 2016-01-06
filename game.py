@@ -16,9 +16,9 @@ def dead(death):
 	print "Would you like to try again?"
 	print "'Yes' or 'No'?"
 	restart = raw_input(prompt)
-	if restart.upper() == ("YES"):
+	if restart.upper() == "YES":
 		start()
-	elif restart.upper() == ("NO"):
+	elif restart.upper() == "NO":
 		exit(bye)
 	else:
 		leave()
@@ -41,9 +41,9 @@ def begin():
 	print "5. Have fun and don't do anything I wouldn't do."
 	print "Ready to start (Y/N)?"
 	begin = raw_input(prompt)
-	if begin.upper() == ("Y" or "YES"):
+	if begin.upper() == "Y" or begin.upper() == "YES":
 		start()
-	elif begin.upper()  == ("QUIT" or "N" or "NO"):
+	elif begin.upper()  == "QUIT" or begin.upper() == "N" or begin.upper() == "NO":
 		leave()
 
 # Game Start
@@ -108,9 +108,9 @@ def house(choice):
 		tunnel_choice = raw_input(prompt)
 
 		tunnel(tunnel_choice)
-	elif choice.upper() == ("BACK" or "RUN"):
+	elif choice.upper() == "BACK" or choice.upper() == "RUN":
 		start()
-	elif choice.upper() == ("QUIT"):
+	elif choice.upper() == "QUIT":
 		leave()
 	else:
 		path("S")
