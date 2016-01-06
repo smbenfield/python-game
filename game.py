@@ -1,37 +1,57 @@
 #!/usr/bin/python
 # python ex31.py
 
-from sys import argv
-from sys import exit
+from sys import *
 
 script, name = argv
 
+# Frequently used strings
 prompt = "> "
 fail = "I don't know that one, try again."
 bye = "Thanks for playing!"
 
-
+# Exit options
 def dead(death):
 	print death, "Fantastic!"
 	print "Would you like to try again?"
-	print "Yes or No?"
+	print "'Yes' or 'No'?"
 	restart = raw_input(prompt)
 	if restart.upper() == ("YES"):
 		start()
 	elif restart.upper() == ("NO"):
 		exit(bye)
 	else:
-		print "Bye!"
-		exit(bye)
+		leave()
+
+def leave():
+	print "bye"
+	exit(bye)
 
 
+# Game Begin and Housekeeping
+def begin():
+	print "Welcome to Demon's Run"
+	print "We are very glad to have you."
+	print "A few housekeeping tips to make your stay enjoyable."
+	print "1. Each prompt has a few words in single quotes, like 'this'."
+	print "   Those words are commands you can give the game to make decisions."
+	print "2. At any time, you can exit the game by simply typing 'quit'."
+	print "3. Anything you run into can be killed or subdued, if you only have the resources."
+	print "4. At any time, as long as you're not dead, you can go backward, simply type 'back' or 'run'"
+	print "5. Have fun and don't do anything I wouldn't do."
+	print "Ready to start (Y/N)?"
+	begin = raw_input(prompt)
+	if begin.upper() == ("Y" or "YES"):
+		start()
+	elif begin.upper()  == ("QUIT" or "N" or "NO"):
+		leave()
+
+# Game Start
 def start():
 	print "Hello, %s, how are you?" % name
 	print "You have awoken from a trance."
 	print "You are standing in a clearing at night,"
-	print "a path goes north to south, which path do you take?"
-	print "1. North"
-	print "2. South"
+	print "a path goes 'north' to 'south', which path do you take?"
 
 	start = raw_input(prompt)
 
@@ -41,104 +61,108 @@ def start():
 
 
 def path(direction):
-	if direction == "1":
+	if direction.upper() == "NORTH" or direction.upper() == "N":
 		print "The path leads to a graveyard." 
 		print "The graves look as though they haven't been touched in decades."
-		print "You see red glowing eyes in the treeline, what do you do?"
-		print "1. Go toward the red glowing eyes."
-		print "2. Run away, back down the path."
+		print "You see red glowing 'eyes' in the treeline."
+		print "You can go forward toward the 'eyes' or 'back' to the clearing, what do you do?"
 	
 		eyes_choice = raw_input(prompt)
 
 		eyes(eyes_choice)
 
-	elif direction == "2":
+	elif direction.upper() == "SOUTH" or direction.upper() == "S":
 		print "You come upon an older, antebellum house."
-		print "It has a metal, but very rusted swing."
-		print "The door is slightly open. What do you do?"
-		print "1. Sit on the swing."
-		print "2. Enter the house."
-		print "3. Go back to the clearing."
+		print "It has a metal, but very rusted, but comfortable looking 'swing'."
+		print "The 'door' is slightly open, and you can enter the house. What do you do?"
 
 		house_choice = raw_input(prompt)
 		
 		house(house_choice)
-
+	elif direction.upper() == "QUIT":
+		leave()
 	else :
-		exit(dead(fail))
+		start()
 
 
 def house(choice):
-	if choice == "1":
+	if choice.upper() == "SWING" or choice.upper() == "SIT":
 		print "You sit on the swing."
 		print "It barely supports you, but is a good place to rest."
-		print "You see carvings in the arms of the swing."
+		print "You can 'swing' on the swing, but it seems unsafe."
+		print "You see 'carvings' in the arms of the swing."
 		print "What do you do?"
-		print "1. Swing in the swing."
-		print "2. Read the carvings."
-		print "3. Stand up and step off of the porch."
 
 		swing_choice = raw_input(prompt)
 
 		swing(swing_choice)
 
-	elif choice == "2":
+	elif choice.upper() == "DOOR" or choice.upper() == "HOUSE" or choice.upper() == "ENTER":
 		print "You push the door open, and are inside a large foyer."
 		print "There is a rug immediately inside the door on the floor."
 		print "Stepping on the rug, you feel a slight give in the floor, just before you fall through it."
-		print "You find yourself in a tunnel that looks fairly modern."
+		print "You find yourself in a 'tunnel' that looks fairly modern and continues into darkness."
+		print "The tunnel has a 'ladder' back to the surface."
 		print "What do you do?"
-		print "1. Go toward darkness."
-		print "2. Return to relative safety."
 
 		tunnel_choice = raw_input(prompt)
 
 		tunnel(tunnel_choice)
-	elif choice == "3":
+	elif choice.upper() == ("BACK" or "RUN"):
 		start()
-
+	elif choice.upper() == ("QUIT"):
+		leave()
 	else:
-		exit(dead(fail))
+		path("S")
 
 
 def tunnel(choice):
-	if choice == "1":
+	if choice.upper() == "DARK" or choice.upper() == "TUNNEL" or choice.upper() == "TOWARD":
+		# make a fight with something?
 		dead("You are eaten by a grue.")
-	elif choice == "2":
-		path("2")
+	elif choice.upper == "LADDER" or choice.upper() == "RUN" or choice.upper() == "BACK":
+		path("S")
+	elif choice.upper() == "QUIT":
+		leave()
 	else:
 		exit(dead(fail))
 
 def swing(choice):
-	if choice == "1":
+	if choice.upper() == "SWING":
+		# make a resource for a stake.
 		dead("That was really dumb. You're now impaled on the wreckage of the swing.")
-	elif choice == "2":
+	elif choice.upper() == "READ" or  choice.upper() == "CARVINGS":
+		# make a resource for a spell.
 		dead("Your brain is turned to mush and pours out of your eyes. Cthulhu has been summoned.")
-	elif choice == "3":
-		path("2")
+	elif choice.upper() == "BACK" or choice.upper() == "RUN":
+		path("S")
+	elif choice.upper() == "QUIT":
+		leave()
 	else:
 		exit(dead(fail))
 
 
 def eyes(choice):	
-	if choice == "1":
+	if choice.upper() == "EYES" or choice.upper() == "TREELINE":
 		print "You reach the space where you thought the eyes were,"
-		print "but nothing is there. Far in the distance,"
-		print "you see what looks like the same eyes, what do you do?"
-		print "1. Go toward the lights"
-		print "2. Go back to the graveyard."
+		print "but nothing is there. Far in the distance, you see what looks like the same eyes."
+		print "You can go toward the 'eyes' or you can go back to the 'graveyard', what do you do?"
 		
 		eyes2 = raw_input(prompt)
 		
-		if eyes2 == "1":
+		if eyes2.upper() == "EYES" or eyes2.upper() == "FORWARD":
 			dead("You trip on a root and die, the lights you saw were lightning bugs. You're colorblind.")
-		elif eyes2 == "2":
-			path("1")
+		elif eyes2.upper() == "GRAVEYARD" or eyes2.upper() == "BACK" or eyes2.upper() == "PATH":
+			path("EYES")
+		elif choice.upper() == "QUIT":
+			leave()
 		else:
 			exit(dead(fail))
-	elif choice == "2":
+	elif choice.upper() == "BACK" or choice.upper() == "PATH" or choice.upper() == "CLEARING":
 		start()
+	elif choice.upper() == "QUIT":
+		leave()
 	else:
 		exit(dead(fail))
 
-start()
+begin()
