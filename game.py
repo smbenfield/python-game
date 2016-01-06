@@ -16,9 +16,9 @@ def dead(death):
 	print "Would you like to try again?"
 	print "Yes or No?"
 	restart = raw_input(prompt)
-	if restart == ("Yes" or "yes"):
+	if restart.upper() == ("YES"):
 		start()
-	elif restart == ("No" or "no"):
+	elif restart.upper() == ("NO"):
 		exit(bye)
 	else:
 		print "Bye!"
