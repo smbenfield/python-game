@@ -20,6 +20,7 @@ def dead(death):
 		start()
 	else:
 		print "Bye!"
+		exit()
 
 
 def start():
