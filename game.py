@@ -2,13 +2,24 @@
 # python ex31.py
 
 from sys import argv
+from sys import exit
+
 script, name = argv
 
 prompt = "> "
 fail = "I don't know that one, try again."
+bye = "Thanks for playing!"
+
 
 def dead(death):
 	print death, "Fantastic!"
+	print "Would you like to try again?"
+	print "Yes or No?"
+	restart = raw_input(prompt)
+	if restart == "Yes" or "yes":
+		start()
+	else:
+		print "Bye!"
 
 
 def start():
@@ -22,7 +33,6 @@ def start():
 	start = raw_input(prompt)
 
 	path(start)
-	exit(dead(fail))
 
 
 def path(direction):
@@ -46,8 +56,9 @@ def path(direction):
 		print "3. Go back to the clearing."
 
 		house_choice = raw_input(prompt)
-
+		
 		house(house_choice)
+
 	else :
 		exit(dead(fail))
 
