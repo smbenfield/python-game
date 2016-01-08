@@ -10,10 +10,15 @@ prompt = "> "
 fail = "I don't know that one, try again."
 bye = "Thanks for playing!"
 inventory = []
+swing = True
+# dead_count = 0
 
 # Exit options
 def dead(death):
 	print death, "Fantastic!"
+	# dead_count = dead_count + 1
+	# return dead_count
+
 	print "Would you like to try again?"
 	print "'Yes' or 'No'?"
 	restart = raw_input(prompt).upper()
@@ -51,6 +56,7 @@ def begin():
 
 # Game Start
 def start():
+	# while dead_count <= 3:
 	print "Hello, %s, how are you?" % name
 	print "You have awoken from a trance."
 	print "You are standing in a clearing at night,"
@@ -60,7 +66,6 @@ def start():
 
 	path(start)
 
-	exit()
 
 
 def path(direction):
@@ -75,7 +80,7 @@ def path(direction):
 		eyes(eyes_choice)
 
 	elif direction == "SOUTH" or direction == "S":
-		print "You come upon an older, antebellum house."
+		print "You are in front of an older, antebellum house."
 		print "It has a metal, but very rusted, but comfortable looking 'swing'."
 		print "The 'door' is slightly open, and you can enter the house. What do you do?"
 
@@ -89,7 +94,7 @@ def path(direction):
 
 
 def house(choice):
-	if choice == "SWING" or choice== "SIT":
+	if choice == "SWING" or choice== "SIT": 
 		print "You sit on the swing."
 		print "It barely supports you, but is a good place to rest."
 		print "You can 'swing' on the swing, but it seems unsafe."
@@ -131,19 +136,37 @@ def tunnel(choice):
 		exit(dead(fail))
 
 def swing(choice):
-	if choice == "SWING":
+	if choice == "SWING" and inventory != "STAKE":
 		# make a resource for a stake.
-		dead("That was really dumb. You're now impaled on the wreckage of the swing.")
+		print "That was really dumb. You're now sitting on the wreckage of the old swing."
+		print "A very sharp piece, almost a stake of wood sits beside you."
+		print "Would you like to pick it up?"
+
+		stake = raw_input(prompt).upper()
+
+		if stake == "YES" or stake == "Y":
+			inventory.append("STAKE")
+			print "Added stake to inventory."
+			print "Your inventory contains: ", inventory
+
+		elif stake == "QUIT":
+			leave()
+		else:
+			print "You stand and move away from the porch."
+
 	elif choice == "READ" or  choice == "CARVINGS":
-		# make a resource for a spell.
-		dead("Your brain is turned to mush and pours out of your eyes. Cthulhu has been summoned.")
+		print "You feel a strange sensation in your mind, as though it is being molded by tentacles."
+		print "You have gained an ability called 'sleep'. It's pretty self-explanatory."
+		inventory.append("SLEEP")
+		print "Your inventory contains: ", inventory
+		house("SWING")
 	elif choice == "BACK" or choice == "RUN":
 		path("S")
 	elif choice == "QUIT":
 		leave()
 	else:
 		exit(dead(fail))
-
+	path("S")
 
 def eyes(choice):	
 	if choice == "EYES" or choice == "TREELINE":
