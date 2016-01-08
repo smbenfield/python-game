@@ -1,33 +1,46 @@
 #!/usr/bin/python
-# python ex31.py
+# python game.py
 
 from sys import *
-
-script, name = argv
 
 # Frequently used strings
 prompt = "> "
 fail = "I don't know that one, try again."
 bye = "Thanks for playing!"
-inventory = []
-swing = True
-# dead_count = 0
+swing_exists = True
 
-# Exit options
+#Character
+inventory_list = []
+lives = 3
+
+# Character Management
+def life(): # life count tool
+	global lives
+	while lives > (0):
+		lives = lives - 1
+		print "You have %s lives left." % lives
+		print "Would you like to try again?"
+		print "'Yes' or 'No'?"
+		restart = raw_input(prompt).upper()
+		if restart == "YES" or restart == "Y":
+			start()
+		elif restart == "NO" or restart == "N":
+			exit(bye)
+		else:
+			leave()
+
+def inventory(choice):
+	print "running inventory"
+	inventory_list.append(choice)
+	print "Added %s to inventory." % choice
+	print "Your inventory contains: ", inventory_list
+
+
+
+#Exit Options
 def dead(death):
 	print death, "Fantastic!"
-	# dead_count = dead_count + 1
-	# return dead_count
-
-	print "Would you like to try again?"
-	print "'Yes' or 'No'?"
-	restart = raw_input(prompt).upper()
-	if restart == "YES":
-		start()
-	elif restart == "NO":
-		exit(bye)
-	else:
-		leave()
+	life()
 
 def leave():
 	print "bye"
@@ -56,12 +69,10 @@ def begin():
 
 # Game Start
 def start():
-	# while dead_count <= 3:
 	print "Hello, %s, how are you?" % name
 	print "You have awoken from a trance."
 	print "You are standing in a clearing at night,"
 	print "a path goes 'north' to 'south', which path do you take?"
-
 	start= raw_input(prompt).upper()
 
 	path(start)
@@ -95,9 +106,11 @@ def path(direction):
 
 def house(choice):
 	if choice == "SWING" or choice== "SIT": 
-		print "You sit on the swing."
-		print "It barely supports you, but is a good place to rest."
-		print "You can 'swing' on the swing, but it seems unsafe."
+		print "Swing:", swing_exists
+		if swing_exists == True:
+			print "You sit on the swing."
+			print "It barely supports you, but is a good place to rest."
+			print "You can 'swing' on the swing, but it seems unsafe."
 		print "You see 'carvings' in the arms of the swing."
 		print "What do you do?"
 
@@ -145,10 +158,10 @@ def swing(choice):
 		stake = raw_input(prompt).upper()
 
 		if stake == "YES" or stake == "Y":
-			inventory.append("STAKE")
-			print "Added stake to inventory."
-			print "Your inventory contains: ", inventory
-
+			print "Inventory Add"
+			inventory("STAKE")
+			print "You are sitting on the pile of wood."
+			house("STICK")
 		elif stake == "QUIT":
 			leave()
 		else:
@@ -157,9 +170,8 @@ def swing(choice):
 	elif choice == "READ" or  choice == "CARVINGS":
 		print "You feel a strange sensation in your mind, as though it is being molded by tentacles."
 		print "You have gained an ability called 'sleep'. It's pretty self-explanatory."
-		inventory.append("SLEEP")
-		print "Your inventory contains: ", inventory
-		house("SWING")
+		inventory("SLEEP")
+		house ("STICK")
 	elif choice == "BACK" or choice == "RUN":
 		path("S")
 	elif choice == "QUIT":
@@ -167,6 +179,7 @@ def swing(choice):
 	else:
 		exit(dead(fail))
 	path("S")
+
 
 def eyes(choice):	
 	if choice == "EYES" or choice == "TREELINE":
@@ -192,4 +205,7 @@ def eyes(choice):
 	else:
 		exit(dead(fail))
 
+
+print "What is your name?"
+name = raw_input(prompt).upper()
 begin()
