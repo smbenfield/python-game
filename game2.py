@@ -42,15 +42,23 @@ def game():
 	elif choice == "INVENTORY" or choice == "LIVES" or choice == "CHARACTER":
 		character()
 	# Exit Options
-	elif choice  == "QUIT":
+	elif choice == "RESTART":
+		begin()
+	elif choice == "QUIT":
 		leave()
 	else:
-		begin()
+		print "I don't know what that means, please try again"
+		game()
 
-# Main Game Functions
+# Begin Game Functions
 def begin():
 	global lives
+	global inventory_list
+	global swing_exists
+
 	lives = 3
+	inventory_list = []
+	swing_exists = True
 
 	print "Welcome to Demon's Run"
 	print "We are very glad to have you."
