@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/programming/python-game
 # python game2.py
 from sys import *
 
@@ -12,26 +12,29 @@ swing_exists = True
 # Game Center
 def game():
 	choice = raw_input(prompt).upper()
-	# Level 1
+	# Level 1 - Start
 	if choice == "BEGIN" or choice == "RETURN" or choice == "START":
 		start()
-	# Level 2
+	# Level 2 - Forest
 	elif choice == "NORTH" or choice == "GRAVEYARD":
 		north()
+	# Level 2 - House
 	elif choice == "SOUTH" or choice == "YARD" or choice == "LADDER":
 		south()
-	# Level 3
+	# Level 3 - Forest
 	elif choice == "EYES":
 		eyes()
 	elif choice == "GRAVES":
 		graves()
+	# Level 3 - House
 	elif choice == "SIT" and swing_exists == True:
 		sit()
 	elif choice == "HOUSE":
 		house()
-	# Level 4
+	# Level 4 - Forest
 	elif choice == "LIGHTS":
 		lights()
+	# Level 4 - House
 	elif choice == "SWING":
 		swing()
 	elif choice == "CARVINGS":
@@ -70,7 +73,7 @@ def begin():
 	print "4. At any time, as long as you're not dead, you can restart, simply type 'return' or 'start'."
 	print "5. Have fun and don't do anything I wouldn't do."
 	print "6. You can check the status of your character at any time, simply type 'lives', 'character', or 'inventory'."
-	print "Ready to 'begin' or would you like to 'quit'?"
+	print "Ready to 'start' or would you like to 'quit'?"
 	game()
 
 # Level 1
