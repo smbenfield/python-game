@@ -1,7 +1,10 @@
 #!/usr/bin/python
 
 rooms = {
-	'clearing' : 'You have awoken from a trance.' : 'You are standing in a clearing at night,' : 'a path goes "north" to "south", which path do you take?'
+	'room' : 'clearing', 
+	'print1' : 'You have awoken from a trance.', 
+	'print2' : 'You are standing in a clearing at night,', 
+	'print3' : 'a path goes "north" to "south", which path do you take?'
 }
 #prints = {
 #	'print1' : 
