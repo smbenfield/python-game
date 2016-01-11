@@ -1,4 +1,4 @@
-#!/usr/bin/programming/python-game
+#!/usr/bin/python
 # python game2.py
 from sys import *
 
