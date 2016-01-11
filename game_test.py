@@ -76,14 +76,16 @@ class Opening(Room):
 		print "   Those words are commands you can give the game to make decisions."
 		print "2. At any time, you can exit the game by simply typing 'quit'."
 		print "3. Anything you run into can be killed or subdued, if you only have the resources."
-		print "4. At any time, as long as you're not dead, you can restart, simply type 'return' or 'start'."
+		# print "4. At any time, as long as you're not dead, you can restart, simply type 'return' or 'start'."
 		print "5. Have fun and don't do anything I wouldn't do."
-		print "6. You can check the status of your character at any time, simply type 'lives', 'character', or 'inventory'."
+		# print "6. You can check the status of your character at any time, simply type 'lives', 'character', or 'inventory'."
 		print "Ready to 'start' or would you like to 'quit'?"
 
 		start = raw_input(prompt).upper()
 		
 		if start == "START":
+			print "Hello, %s, how are you?" % name
+			print "You have awoken from a trance."
 			return 'start'
 		elif start == "QUIT":
 			return 'quit'
@@ -93,8 +95,6 @@ class Opening(Room):
 # Level 1
 class Start(Room):
 	def enter(self):
-		print "Hello, %s, how are you?" % name
-		print "You have awoken from a trance."
 		print "You are standing in a clearing at night,"
 		print "a path goes 'north' to 'south', which path do you take?"
 		
@@ -108,7 +108,7 @@ class Start(Room):
 			return 'quit'
 		else:
 			print fail
-			return 'opening'
+			return 'start'
 
 # Level 2
 class North(Room):
@@ -127,7 +127,7 @@ class North(Room):
 			return 'quit'
 		else:
 			print fail
-			return 'opening'
+			return 'start'
 
 
 class South(Room):
@@ -147,7 +147,7 @@ class South(Room):
 			return 'quit'
 		else:
 			print fail
-			return 'opening'
+			return 'start'
 
 # Level 3
 class Graveyard(Room):
@@ -164,12 +164,12 @@ class Graveyard(Room):
 		elif g_yard == "EYES":
 			return 'eyes'
 		elif g_yard == "RETURN":
-			return 'opening'
+			return 'start'
 		elif g_yard == "QUIT":
 			return 'quit'
 		else:
 			print fail
-			return 'opening'
+			return 'start'
 
 class East(Room):
 	def enter(self):
@@ -412,12 +412,12 @@ class Map(object):
         'north' : North(),
         'south' : South(),
         # Level 3
-        'swing' : Swing()
+        'swing' : Swing(),
         'east' : East(),
         'sit' : Swing(),
         'graveyard' : Graveyard(),
         # Level 4
-        'stairs' : Stairs()
+        'stairs' : Stairs(),
         'cabin' : Cabin(),
         'tunnel' : Tunnel(),
         'eyes' : Eyes(),
