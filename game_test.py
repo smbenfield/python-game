@@ -19,9 +19,12 @@ class Room(object):
 	def enter(self):
 		print "This room has not been configured, subclass it and run enter()."
 		exit(1)
+
 class Character(object):
 	
 	swing_exists = True
+	doll_exists = True
+	book_exists = True
 	
 	inventory_list = []
 
@@ -285,8 +288,11 @@ class Graves(Room):
 class Cabin(Room):
 	def enter(self):
 		print "Once inside the cabin, you find a single room with one large bed and one small bed."
-		print "There is a single 'box' at the end of each bed, one locked, and the other unlocked."
-		print "On a shelf, you find a 'doll' that looks worn, but otherwise, normal. What do you do?"
+		if John_Cena.book_exists == True:
+			print "There is a single 'box' at the end of each bed, one locked, and the other unlocked."
+		if John_Cena.doll_exists == True:
+			print "On a shelf, you find a 'doll' that looks worn, but otherwise, normal. What do you do?"
+		print "You can 'return' to the "
 
 		cabin = raw_input(prompt).upper()
 		
@@ -294,11 +300,14 @@ class Cabin(Room):
 			return 'doll'
 		if cabin == "BOX":
 			return 'box'
+		elif cabin == "RETURN":
+			return 'south'
 		elif cabin == "QUIT":
 			return 'quit'
 		else:
 			print fail
-			return 'opening'
+			return 'cabin' 		
+
 
 class Stake(Room):
 	def enter(self):
@@ -346,6 +355,7 @@ class Stairs(Room):
 # Level 5
 class Box(Room):
 	def enter(self):
+		John_Cena.book_exists = False
 		print "You open the box and find a small book."
 		print "Upon opening the book, you hear voices inside "
 		print "your head that tell you the secret to combat." 
@@ -356,6 +366,7 @@ class Box(Room):
 
 class Doll(Room):
 	def enter(self):
+		John_Cena.doll_exists = False
 		print "You pick up the doll, and find a name on its dress."
 		print "The name reads: Annabel Lee."
 		print "You find small specks of blood on the dolls face."
